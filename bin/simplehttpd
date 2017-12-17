@@ -1,0 +1,47 @@
+#!/bin/sh
+# chkconfig: 345 99 1
+# description: simplehttpd
+# processname: simplehttpd
+
+dir=/home/ec2-user/bin
+exe=simplehttpd.rb
+
+start() {
+    PID=`ps aux | grep ruby | grep $exe | awk '{print $2}'`
+
+    if [ -n "$PID" ]; then
+      echo "Already running: $PID"
+    else
+      echo -n "starting :$exe"
+      sudo ruby -I $dir -r deamonize $dir/$exe > $dir/1.log 2>$dir/2.log
+    fi
+
+    return 0
+}
+
+stop() {
+    PID=`ps aux | grep ruby | grep $exe | awk '{print $2}'`
+
+    if [ -n "$PID" ]; then
+      sudo kill $PID
+      echo "Killed: $PID"
+    else
+      echo "Not running"
+    fi
+
+    return 0
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop}"
+        exit 2
+esac
+
+exit 0
