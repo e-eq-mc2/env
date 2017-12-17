@@ -1,6 +1,6 @@
 #!/bin/sh -x
 
-cp simplehttpd /etc/init.d/
-chmod +x /etc/init.d/simplehttpd
-chkconfig --add simplehttpd
+sudo cp simplehttpd /etc/init.d/
+sudo chmod +x /etc/init.d/simplehttpd
+sudo chkconfig --add simplehttpd
 sudo service simplehttpd start
