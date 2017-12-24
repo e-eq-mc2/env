@@ -1,6 +1,9 @@
 syntax on
 
 " Tab系
+" Tabキーを押した際にタブ文字の代わりにスペースを入れる
+set expandtab
+" 自動インデントでずれる幅
 set shiftwidth=2
 " タブキー押下時に挿入される文字幅を指定
 set softtabstop=2
@@ -20,7 +23,18 @@ set guioptions+=a
 
 set number
 
-set nofoldenable    " disable folding
+" Foldingの無効化
+set nofoldenable
+
+" yank to clipboard
+if has("clipboard")
+  set clipboard=unnamed " copy to the system clipboard
+
+  if has("unnamedplus") " X11 support
+    set clipboard+=unnamedplus
+  endif
+endif
+
 
 " Note: Skip initialization for vim-tiny or vim-small.
 if 0 | endif
