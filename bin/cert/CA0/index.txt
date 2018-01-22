@@ -1,0 +1,1 @@
+V	280120124055Z		01	unknown	/C=JP/ST=Tokyo-to/O=Example company/OU=Example dept./CN=CA1
