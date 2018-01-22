@@ -39,8 +39,8 @@ default_ca	= CA_default		# The default ca section
 ####################################################################
 [ CA_default ]
 
-dir		= /root/ssl/CA0		# Where everything is kept
-certs		= $dir/certs		# Where the issued certs are kept
+dir		    = ../CA0		# Where everything is kept
+certs	  	= $dir/certs		# Where the issued certs are kept
 crl_dir		= $dir/crl		# Where the issued crl are kept
 database	= $dir/index.txt	# database index file.
 #unique_subject	= no			# Set to 'no' to allow creation of
@@ -84,7 +84,7 @@ policy		= policy_match
 [ CA_sub01 ]
  
 #dirをrootCAとは違うディレクトリに作成
-dir             = /root/ssl/CA1         # Where everything is kept
+dir             = ../CA1                # Where everything is kept
 certs           = $dir/certs            # Where the issued certs are kept
 crl_dir         = $dir/crl              # Where the issued crl are kept
 database        = $dir/index.txt        # database index file.
