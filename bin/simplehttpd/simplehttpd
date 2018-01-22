@@ -3,7 +3,7 @@
 # description: simplehttpd
 # processname: simplehttpd
 
-dir=/home/ec2-user/bin
+dir=/home/ec2-user/bin/simplehttpd
 exe=simplehttpd.rb
 
 start() {
