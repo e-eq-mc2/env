@@ -21,12 +21,10 @@ while true
 		is_get        = false
 		end_of_header = false
 		req_time      = 0
+    puts Time.now
 		while request = socket.gets
 			t0 = Time.now
-
-			puts Time.now
-
-			p request
+			puts "> #{request}"
 
 			if request.include? "GET"
 				is_get = true
