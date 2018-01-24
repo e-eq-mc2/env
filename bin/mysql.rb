@@ -66,6 +66,8 @@ client = nil
 
     query = %q{SELECT * FROM aws ORDER BY id DESC LIMIT 1}
     submit(client, query)
+  rescue Interrupt
+    abort
   rescue Exception => e
     puts "Error(#{Time.now}): #{e}"
     client = nil
