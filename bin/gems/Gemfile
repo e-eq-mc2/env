@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+
+gem 'activesupport'
+gem 'alfred-3_workflow'
+gem 'awesome_print'
+gem 'pry'
+gem 'pry-byebug'
+gem 'nokogiri'
+gem 'innodb_ruby'
