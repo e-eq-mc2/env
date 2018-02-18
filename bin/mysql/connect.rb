@@ -3,9 +3,9 @@ require 'mysql2'
 $stdout.sync = true
 $stderr.sync = true
 
-USERNAME = ""
-PASSWORD = ""
-WRITER_ENDPOINT = ""
+USERNAME = 
+PASSWORD = 
+WRITER_ENDPOINT = 
 
 DB       = "test"
 NUM_ROWS = 5
@@ -30,7 +30,7 @@ def query(client, q)
 
   puts "----"
   puts "Query(#{Time.now}): #{q}"
-  puts "Resulut:"
+  #puts "Resulut:"
   return if results.nil?
 
   results.each do |row|
@@ -78,15 +78,22 @@ end
 
 writer_endpoint = WRITER_ENDPOINT
 client_w = connect(writer_endpoint)
-setup_tables(client_w)
-insert(client_w)
+#setup_tables(client_w)
+#insert(client_w)
 
 loop do
   begin
     sleep 1
     client_w = connect(writer_endpoint) if client_w.nil?
 
-    query(client_w, "SELECT * FROM #{DB}.table_a ORDER BY id DESC LIMIT 1")
+    query(client_w, "SHOW FULL PROCESSLIST")
+
+    client_w.close()
+    client_w = nil
+
+    #query(client_w, "SELECT * FROM #{DB}.table_a ORDER BY id DESC LIMIT 1")
+    #query(client_w, "select AURORA_VERSION();")
+    #query(client_w, 'select @@aurora_version;')
   rescue Interrupt
     abort
   rescue Exception => e
