@@ -57,10 +57,10 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " Refer to |:NeoBundle-examples|.
 " Note: You don't set neobundle setting in .gvimrc!
 NeoBundle 'scrooloose/nerdtree'
-
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'joe-skb7/cscope-maps'
+NeoBundle 'vim-scripts/taglist.vim'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'rking/ag.vim'
 
 NeoBundle 'farmergreg/vim-lastplace'
 
@@ -73,9 +73,7 @@ filetype plugin indent on
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 
-" scrooloose/nerdtree
-"nnoremap <silent><C-e> :NERDTreeToggle<CR>
-"nnoremap <silent><C-e> :NERDTreeToggle %<CR>
+" 'scrooloose/nerdtree'
 function MyNerdTreeToggle()
 	if &filetype == 'nerdtree'
 		:NERDTreeToggle
@@ -85,20 +83,12 @@ function MyNerdTreeToggle()
 endfunction
 nnoremap <silent><C-e> :call MyNerdTreeToggle() <CR>
 
-" for ctags
-"nnoremap  <C-]>    g<C-]>
-"nnoremap  v<C-]>   :vsp +:exec("tag\ ".expand("<cword>"))<CR>
-"set splitright     "新しいウィンドウを右にひらく
+" cscopequickfix
+set cscopequickfix=s-,g-,c-,d-,i-,t-,e-,a-
+"set cst
 
-function! FollowTag()
-  if !exists("w:tagbrowse")
-    vsplit
-    let w:tagbrowse=1
-  endif
-  execute "tag " . expand("<cword>")
-endfunction
-
-nnoremap <c-]> :call FollowTag()<CR>
-
-au BufRead,BufNewFile *.md set filetype=markdown
-let g:previm_open_cmd = 'open -a Google\ Chrome'
+augroup myvimrc
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost l*    lwindow
+augroup END
