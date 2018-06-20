@@ -61,6 +61,7 @@ NeoBundle 'joe-skb7/cscope-maps'
 NeoBundle 'vim-scripts/taglist.vim'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'rking/ag.vim'
+NeoBundle 'vim-utils/vim-man'
 
 NeoBundle 'farmergreg/vim-lastplace'
 
@@ -84,7 +85,7 @@ endfunction
 nnoremap <silent><C-e> :call MyNerdTreeToggle() <CR>
 
 " cscopequickfix
-set cscopequickfix=s-,g-,c-,d-,i-,t-,e-,a-
+set cscopequickfix=s-,g-,c-,d-,i-,t-,e-
 "set cst
 
 augroup myvimrc
@@ -92,3 +93,22 @@ augroup myvimrc
   autocmd QuickFixCmdPost [^l]* cwindow
   autocmd QuickFixCmdPost l*    lwindow
 augroup END
+
+" Fix E568: duplicate cscope database not added
+" http://thoughtsolo.blogspot.com/2014/02/cscope-issue-duplicate-cscope-database.html
+set nocscopeverbose 
+
+nnoremap <C-p> <Esc>:set paste! paste?<CR>i
+
+" Binary
+"バイナリ編集(xxd)モード（vim -b での起動、または *.bin ファイルを開くと発動）
+augroup BinaryXXD
+  autocmd!
+  autocmd BufReadPre   *.bin let &binary=1
+  autocmd BufReadPost  *     if  &binary   | silent   %!xxd -g 1
+  autocmd BufReadPost  *     set ft=xxd    | endif
+  autocmd BufWritePre  *     if  &binary   | execute '%!xxd -r' | endif
+  autocmd BufWritePost *     if  &binary   | silent   %!xxd -g 1
+  autocmd BufWritePost *     set nomod     | endif
+augroup END
+
