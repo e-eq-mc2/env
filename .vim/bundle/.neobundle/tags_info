@@ -1,6 +1,8 @@
+ag.vim
+cscope-maps
 neobundle.vim
 nerdtree
-open-browser.vim
-previm
+tagbar
+taglist.vim
 vim-lastplace
-vim-markdown
+vim-man
